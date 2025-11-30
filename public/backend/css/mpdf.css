@@ -1,0 +1,96 @@
+body{
+	font-size: 12px;
+	font-family: arial;
+}
+h1, h2{
+	font-weight: bold !important;
+	padding: 15px 0;
+	text-align: center;
+}
+.mpdf-header, .mpdf-footer{
+	width:100%;
+	border-bottom: 1px solid #000000;
+	vertical-align: bottom;
+	font-family: arial;
+	font-size: 10px;
+	color: #000;
+}
+
+.mpdf-footer{
+	border-top: 1px solid #000;
+	border-bottom: none;
+	vertical-align: top;
+}
+
+td{
+	vertical-align: top;
+}
+
+.pag{
+	font-size: 10px;
+}
+
+table.css-table,
+table.css-table td,
+table.css-table th {
+	border: 0.07mm solid #000;
+}
+table.css-table {
+	border-spacing: 0px;
+    border-collapse: collapse;
+}
+
+table.css-table tbody td.pintar-celda{
+	background: #f4f4f4;
+}
+
+table.css-table tbody td {
+	vertical-align: top;
+}
+table.css-table thead th {
+	background-color: #EEEEEE;
+	text-align: center;
+
+	vertical-align: middle;
+}
+
+table.css-table tbody td.number {
+	text-align: center;
+	width: 25px;
+}
+
+table.css-table th,
+table.css-table td {
+	padding:3px;
+}
+
+table.css-table tr.align-center td{
+	text-align: center;
+}
+
+table.css-table tr.align-center td.align-left{
+	text-align: left;
+}
+
+table.css-table tr.align-center td.align-right{
+	text-align: right;
+}
+
+table.font-11{
+	font-size: 11px !important;
+}
+
+table.font-10{
+	font-size: 10px !important;
+}
+
+table.font-9{
+	font-size: 9px !important;
+}
+
+table tr td.literal{
+	font-size: 7px !important;
+}
+.bold{
+	font-weight:bold;
+}

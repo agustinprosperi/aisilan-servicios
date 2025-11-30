@@ -1,0 +1,1441 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    border-top: 5px solid #2278AB;
+    margin-bottom: 16px;
+}
+
+
+/* Center Fix */
+
+.TuExChange-centerFix {
+    margin: 0 auto;
+}
+
+/* Partes */
+
+#TuExChange-ParteSup {
+    overflow: auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    width: 1000px;
+}
+
+#TuExChange-NavPart, #TuExChange-ContainerPart, #TuExChange-FooterPart, #TuExChange-SuperiorPart{
+	width: 1000px;
+}
+
+/* Logo */
+
+#TuExChange-Logo {
+    display: inline-block;
+    float: left;
+}
+
+.TuExChange-LogoImg {
+    background: url("images/logo.png") repeat scroll 0 0 transparent;
+    display: block;
+    height: 69px;
+    width: 272px;
+}
+
+/* Login + Reg + Idioma */
+
+#TuExChange-UserTools {
+    display: inline-block;
+    float: right;
+}
+
+
+
+#TuExChange-UserTools > section {
+list-style: none outside none;
+margin-top: 19px;
+position: relative;
+overflow: hidden;
+}
+
+#TuExChange-UserTools > section > a > li {
+    background: url("images/sepTop.png") repeat-y scroll right center #2D2D2D;
+    color: #FFFFFF;
+    display: inline;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 10px 15px;
+	transition: 1s all ease;
+}
+
+#TuExChange-UserTools > section > a > li.blue1{
+	background: url("images/sepTopB.png") repeat-y scroll right center #2D2D2D;
+}
+
+#TuExChange-UserTools > section > a > li.green1{
+	background: url("images/sepTopG.png") repeat-y scroll right center #2D2D2D;
+}
+
+#TuExChange-UserTools > section > a > li:hover{
+	background-color: #424242;
+}
+
+#TuExChange-UserTools > section > a {
+    display: inline-block;
+    margin-right: 10px;
+    text-decoration: none !important;
+}
+
+#TuExChange-UserTools > section > a:last-child{
+	margin-right: 0!important;
+}
+
+#TuExChange-UserTools > section > a > li.red {
+    background: none repeat scroll 0 0 #875556;
+    display: inline-block;
+    padding: 10px 13px 10px 10px !important;
+}
+
+#TuExChange-UserTools > section > a > li.blue {
+    background: none repeat scroll 0 0 #64808C;
+    display: inline-block;
+    padding: 10px 13px 10px 10px !important;
+	}
+	
+#TuExChange-UserTools > section > a > li.green{
+    background: none repeat scroll 0 0 #617372;
+    display: inline-block;
+    padding: 10px 13px 10px 10px !important;
+}	
+
+
+/* Menu Pagina */
+
+
+
+nav {
+ background: #2f5d76; /* Old browsers */
+background: -moz-linear-gradient(top,  #2f5d76 0%, #23414f 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2f5d76), color-stop(100%,#23414f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #2f5d76 0%,#23414f 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #2f5d76 0%,#23414f 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #2f5d76 0%,#23414f 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #2f5d76 0%,#23414f 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f5d76', endColorstr='#23414f',GradientType=0 ); /* IE6-9 */
+
+    border-top: 1px solid #7295BA;
+    height: 50px;
+    width: 100%;
+}
+
+#TuExChange-NavPart > ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+#TuExChange-NavPart > ul > a > li {
+    border-left: 1px solid #3399CC;
+    border-right: 1px solid #3399CC;
+    color: #FFFFFF;
+    float: left;
+    font-family: 'Source Sans Pro',sans-serif;
+     min-height: 50px;
+    padding: 0 14px !important;
+    text-shadow: 1px 1px 1px #567699;
+    transition: 0.8s all ease;
+}
+
+
+#TuExChange-NavPart > ul > a > li > div {
+    display: block;
+    margin-top: 13px;
+    position: relative;
+	color: #FFFFFF;
+	text-shadow: 1px 1px 1px #567699;
+	text-decoration: none;
+}
+#TuExChange-NavPart > ul > a > li:hover {
+    background: #3399CC;
+    border-left: 1px solid #567699;
+	cursor: pointer;
+}
+#TuExChange-NavPart > ul > a > li:first-child{
+	border-left: none!important;
+}
+
+#TuExChange-NavPart > ul > a > li:first-child:hover{
+	border-left: 1px solid #48637F;
+}
+
+/* Contenido Pagina */
+
+/* Contenido -> Parte Bottom */
+
+
+#TuExChange-BottomPart {
+    overflow: auto;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+
+#TuExChange-BottomPart-Calculadora {
+    border: 1px solid #DDDDDD;
+    box-shadow: 1px 1px 1px #DDDDDD !important;
+    float: left;
+    margin-right: 10px;
+    width: 33%;
+	border-left: none;
+	border-right: none;
+}
+
+.TuExChange-BottomPart-CalculadoraTile{
+background: #5f9cc2; /* Old browsers */
+background: -moz-linear-gradient(top,  #5f9cc2 0%, #4d8cb3 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5f9cc2), color-stop(100%,#4d8cb3)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #5f9cc2 0%,#4d8cb3 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #5f9cc2 0%,#4d8cb3 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #5f9cc2 0%,#4d8cb3 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #5f9cc2 0%,#4d8cb3 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f9cc2', endColorstr='#4d8cb3',GradientType=0 ); /* IE6-9 */
+
+padding: 10px;
+border-left: 1px solid #5594BA;
+border-right: 1px solid #5594BA;
+
+}
+
+
+
+.TuExChange-BottomPart-CalculadoraTile > h1 {
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 15px;
+    margin: 0 !important;
+    text-shadow: 1px 1px 1px #387799;
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont {
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    padding: 10px;
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont > section {
+    background: none repeat scroll 0 0 #F4F7D0;
+    border-bottom: 2px dotted #DAD1AD;
+    border-top: 2px dotted #DAD1AD;
+    color: #9F915C;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 13px;
+    padding: 10px;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont > section > p {
+    display: block;
+    margin: 0 !important;
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont > section > p > span {
+    color: #8E814D !important;
+    margin-right: 5px;
+}
+
+
+
+
+.TuExChange-BottomPart-CalculadoraCont > div {
+    margin-top: 9px;
+    padding-bottom: 18px;
+}
+
+
+
+.TuExChange-BottomPart-CalculadoraCont > h2 {
+    background: url("images/h2Calc.png") repeat-x scroll 0 0 transparent;
+	margin: 0!important;
+}
+
+.TuExChange-BottomPart-CalculadoraCont > h2 > span {
+    background: none repeat scroll 0 0 #FFFFFF !important;
+    margin-left: 124px;
+    padding-left: 16px;
+    padding-right: 12px;
+}
+.TuExChange-BottomPart-CalculadoraCont > div:last-child {
+    border-bottom: none;
+
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont > div > select {
+    border: 1px solid #DDDDDD;
+    color: #7C7C7B;
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 5px;
+    width: 150px;
+}
+
+
+.TuExChange-BottomPart-CalculadoraCont > div > p {
+    color: #787875;
+    font-family: 'Source Sans Pro',sans-serif;
+    margin-bottom: 10px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+
+.TuExChange-BottomPart-CalculadoraContInput {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 2px #DDDDDD inset;
+    color: #8F8E8B;
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 6px;
+}
+
+.TuExChange-BottomPart-CalculadoraContButts {
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 13px;
+    padding: 10px 19px;
+}
+
+.TuExChange-BottomPart-CalculadoraContButts.Check{
+	background: #fad58c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #fad58c 0%, #fbc863 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fad58c), color-stop(100%,#fbc863)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #fad58c 0%,#fbc863 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #fad58c 0%,#fbc863 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #fad58c 0%,#fbc863 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #fad58c 0%,#fbc863 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fad58c', endColorstr='#fbc863',GradientType=0 ); /* IE6-9 */
+
+	border: 1px solid #CEA24A;
+    border-radius: 2px 2px 2px 2px;
+    color: #AB7D23;
+    text-shadow: 0 1px 1px #FFFFFF;
+}
+
+.TuExChange-BottomPart-CalculadoraContButts.Check:hover, .TuExChange-BottomPart-CalculadoraContButts.Check:active{
+	background: #facd73; /* Old browsers */
+	background: -moz-linear-gradient(top,  #facd73 0%, #fabd43 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#facd73), color-stop(100%,#fabd43)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #facd73 0%,#fabd43 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #facd73 0%,#fabd43 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #facd73 0%,#fabd43 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #facd73 0%,#fabd43 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#facd73', endColorstr='#fabd43',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #C88D17;
+}
+
+.TuExChange-BottomPart-CalculadoraContButts.Generate{
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    color: #929292;
+    margin-left: 3px;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+.TuExChange-BottomPart-CalculadoraContButts.Generate:hover, .TuExChange-BottomPart-CalculadoraContButts.Generate:active{
+	background: #f0f0f0; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f0f0f0 1%, #dcdcdc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f0f0f0), color-stop(100%,#dcdcdc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #f0f0f0 1%,#dcdcdc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #f0f0f0 1%,#dcdcdc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #f0f0f0 1%,#dcdcdc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #f0f0f0 1%,#dcdcdc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#dcdcdc',GradientType=0 ); /* IE6-9 */
+
+	border: 1px solid #BEC0C0;
+}
+
+
+
+
+#TuExChange-BottomPart-News {
+    float: left;
+    padding-left: 15px;
+    width: 64%;
+}
+#TuExChange-BottomPart-News > h1, #TuExChange-NewsGlobal > h1 {
+    border-bottom: 2px solid;
+    color: #717171;
+    font-family: 'Source Sans Pro',sans-serif;
+    margin: 0;
+    padding-bottom: 2px;
+	font-weight: lighter;
+}
+
+#TuExChange-BottomPart-News > article, #TuExChange-InsideP, #TuExChange-NewsGlobal > article {
+    border-radius: 2px 2px 4px 4px;
+    border-top: 1px solid #DDDDDD;
+    float: left;
+    margin-right: 16px;
+    margin-top: 10px;
+    width: 48.7%;
+}
+
+#TuExChange-NewsGlobal > article{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+
+#TuExChange-BottomPart-News > article:last-child {
+    margin-right: 0 !important;
+}
+
+
+
+#TuExChange-BottomPart-News > article > div, #TuExChange-InsideP > div, #TuExChange-NewsGlobal > article > div{
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 0%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+	border-bottom: 1px solid #CCCCCC;
+    box-shadow: 0 -1px 1px #FFFFFF inset;
+    padding: 12px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-radius: 2px 2px 0 0;
+}
+
+
+
+#TuExChange-BottomPart-News > article > div > h1, #TuExChange-InsideP > div > h1, #TuExChange-NewsGlobal > article > div > h1 {
+    color: #A1A1A1;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 15px;
+    margin: 0;
+    text-shadow: 1px 1px 1px #FFFFFF;
+}
+
+#TuExChange-NewsGlobal > h1{
+	margin-bottom: 15px;
+}
+
+#TuExChange-BottomPart-News > article > section, #TuExChange-InsideP > section, #TuExChange-NewsGlobal > article > section {
+    color: #A1A1A1;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 12px;
+    padding: 10px 10px 15px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+
+#TuExChange-BottomPart-News > article > div.bottom, #TuExChange-NewsGlobal > article > div.bottom{
+	background: #b17474; /* Old browsers */
+	background: -moz-linear-gradient(top,  #b17474 0%, #9e5b5b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b17474), color-stop(100%,#9e5b5b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #b17474 0%,#9e5b5b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #b17474 0%,#9e5b5b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #b17474 0%,#9e5b5b 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #b17474 0%,#9e5b5b 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b17474', endColorstr='#9e5b5b',GradientType=0 ); /* IE6-9 */
+	border-left: 1px solid #B76D6D;
+	border-right: 1px solid #B76D6D;
+    border-bottom: medium none;
+    border-radius: 0 0 4px 4px;
+    border-top: 1px solid #B76D6D;
+    box-shadow: 0 1px 1px #F3D3D3 inset;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+
+#TuExChange-NewsGlobal > article > div.bottom {
+    background: url("images/sepNews.png") repeat-x scroll left top #EBEDED;
+    border: 1px solid #DDDDDD;
+    box-shadow: none;
+	overflow: auto;
+	border-top: none;
+}
+
+.ViewsNewsIc{
+	background: url(images/eye.png);
+	width: 16px;
+	height: 16px;
+	float: left;
+	 margin-right: 9px;
+}
+
+.Newsbutton, .NewsViewsCt{
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 8px 11px;
+    color: #777777 !important;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+	 float: left;
+    font-size: 12px;
+}
+
+.NewsViewsCt{
+	float: right;
+}
+
+.Newsbutton.white,.NewsViewsCt.Cont{
+    background: #f5f5f5;
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0'); /*  IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
+    border-color: #dedede #d8d8d8 #d3d3d3;
+    color: #555;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+    -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+    box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+}
+.Newsbutton.white:hover, .button.white.selected{
+    background: #f4f4f4;
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8'); /*  IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f8f8f8)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
+    border-color: #c7c7c7 #c3c3c3 #bebebe;
+    text-shadow: 0 1px 0 #fdfdfd;
+    -webkit-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    -moz-box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+}
+
+#TuExChange-NewsSearch {
+    margin-bottom: 20px;
+}
+
+#TuExChange-NewsSearch > input {
+    border: 1px solid #DDDDDD;
+    border-radius: 3px 0 0 3px;
+    box-shadow: 0 1px 1px #DDDDDD inset;
+    color: #999999;
+    font-family: 'Source Sans Pro',sans-serif;
+    height: 36px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 196px;
+}
+
+#TuExChange-NewsSearch > a{
+    background: #f5f5f5;
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0'); /*  IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
+	color: #888;
+    font-family: 'Source Sans Pro',sans-serif;
+	border: 1px solid #ccc;
+	border-left: none;
+	font-size: 15px;
+	display: inline-block;
+    height: 38px;
+    padding-left: 8px;
+    padding-right: 8px;
+    vertical-align: top;
+	}
+
+#TuExChange-NewsSearch > a > span {
+    position: relative;
+    top: 8px;
+}
+
+	#TuExChange-NewsSearch > a:hover{
+    background: #f4f4f4;
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8'); /*  IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#f8f8f8)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
+	}
+	
+#TuExChange-CenterPart {
+    margin-bottom: 20px;
+    margin-top: 55px;
+    padding-bottom: 16px;
+    padding-left: 26px;
+    padding-right: 0 !important;
+    padding-top: 10px;
+}
+
+#TuExChange-CenterPart > li {
+    border-right: 1px solid #DDDDDD;
+    display: inline-block;
+    list-style: none outside none;
+    padding-left: 29px;
+    width: 30%;
+}
+
+#TuExChange-CenterPart > li:last-child {
+    border-right: medium none;
+    width: 21%;
+}
+#TuExChange-CenterPart > li > img {
+    display: inline-block;
+	opacity: 0.8;
+	transition: 0.8s all ease;
+}
+
+#TuExChange-CenterPart > li > img:hover{
+	opacity: 1;
+}
+#TuExChange-CenterPart > li > p {
+    color: #9A9999;
+    display: inline-block;
+    font-family: 'Source Sans Pro',sans-serif;
+    margin: 0 0 0 18px;
+    vertical-align: top;
+	transition: 0.5s all ease;
+}
+
+#TuExChange-CenterPart > li > p:hover{
+	color: #818181;
+}
+
+#TuExChange-CenterPart > li > p > span {
+    display: block;
+    font-size: 15px;
+}
+#TuExChange-CenterPart > li > p > span.strong {
+    color: #707070;
+    font-size: 21px;
+	transition: 0.5s all ease;
+}
+
+#TuExChange-CenterPart > li > p > span.strong:hover{
+	color: #89AEC5;
+}
+
+
+/* Advise */
+
+
+
+.TuExChange-ContactAdvise {
+    background: none repeat scroll 0 0 #DBE9F2;
+    border-top: 3px solid #89AEC5;
+    color: #7CA7C1;
+    font-family: 'Source Sans Pro',sans-serif;
+    margin-top: 10px;
+    padding: 15px;
+}
+
+
+.TuExChange-ContactAdvise > span {
+    color: #688DA3;
+}
+
+/* Bottoms Part */
+
+#TuExChange-BottomPartF {
+    margin-top: 17px !important;
+}
+
+
+#TuExChange-BottomPartF > h2 {
+    color: #6693CE;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 15px;
+    margin-left: 5px;
+    padding-bottom: 5px;
+}
+
+/* Payments */
+
+
+#TuExChange-BottomPartF > ul {
+    margin-bottom: 33px;
+    overflow: auto;
+    padding: 0;
+}
+
+#TuExChange-BottomPartF > ul > li {
+    float: left;
+    list-style: none outside none;
+    margin-right: 24px;
+}
+
+.TuExChange-Paym-LibertyResrv{
+	background: url(images/payments/libertyresr.png);
+	width: 99px;
+	height: 34px;
+	background-position: -99px 0;
+}
+
+.TuExChange-Paym-LibertyResrv:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Perf{
+	background: url(images/payments/perf.png);
+	width: 120px;
+	height: 34px;
+	background-position: -120px 0;
+}
+
+.TuExChange-Paym-Perf:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Westpac{
+	background: url(images/payments/westpac.png);
+	width: 70px;
+	height: 34px;
+	background-position: -70px 0;
+}
+
+.TuExChange-Paym-Westpac:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Ukash{
+	background: url(images/payments/ukash.png);
+	width: 70px;
+	height: 34px;
+	background-position: -70px 0;
+}
+
+.TuExChange-Paym-Ukash:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Paypal{
+	background: url(images/payments/paypal.png);
+	width: 80px;
+	height: 34px;
+	background-position: -80px 0;
+}
+
+.TuExChange-Paym-Paypal:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Webmoney{
+	background: url(images/payments/webmoney.png);
+	width: 80px;
+	height: 34px;
+	background-position: -80px 0;
+}
+
+.TuExChange-Paym-Webmoney:hover{
+	background-position: 0 0;
+}
+
+
+.TuExChange-Paym-Western{
+	background: url(images/payments/western.png);
+	width: 70px;
+	height: 34px;
+	background-position: -70px 0;
+}
+
+.TuExChange-Paym-Western:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-SkypeC{
+	background: url(images/payments/skypecredit.png);
+	width: 66px;
+	height: 34px;
+	background-position: -66px 0;
+}
+
+.TuExChange-Paym-SkypeC:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-PaySafe{
+	background: url(images/payments/paysafe.png);
+	width: 94px;
+	height: 34px;
+	background-position: -94px 0;
+}
+
+.TuExChange-Paym-PaySafe:hover{
+	background-position: 0 0;
+}
+
+.TuExChange-Paym-Moneygram{
+	background: url(images/payments/moneygram.png);
+	width: 80px;
+	height: 34px;
+	background-position: -80px 0;
+}
+
+.TuExChange-Paym-Moneygram:hover{
+	background-position: 0 0;
+}
+
+
+/* Footer Pagina */
+
+footer{
+	background: #29546b; /* Old browsers */
+	background: -moz-linear-gradient(top,  #29546b 0%, #0f242e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#29546b), color-stop(100%,#0f242e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #29546b 0%,#0f242e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #29546b 0%,#0f242e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #29546b 0%,#0f242e 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #29546b 0%,#0f242e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29546b', endColorstr='#0f242e',GradientType=0 ); /* IE6-9 */
+
+	border-top: 5px solid #2278AB;
+    margin-top: 25px;
+    padding-bottom: 30px;
+    padding-top: 20px;
+}
+
+#TuExChange-FooterPart > ul {
+    list-style: none outside none;
+    margin: 0 0 10px;
+    overflow: auto;
+    padding: 0;
+}
+
+#TuExChange-FooterPart > ul > li {
+    color: #FFFFFF;
+    float: left;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 10px;
+    text-shadow: 0 1px 1px #10252F;
+}
+
+#TuExChange-FooterPart > ul > li > a{
+	color: #FFFFFF;
+	text-decoration: none;
+	transition: 0.8s all ease;
+}
+
+#TuExChange-FooterPart > ul > li > a:hover{
+	color: #A4B8D2;
+}
+
+#TuExChange-FooterPart > section {
+    margin-left: 10px;
+    position: relative;
+    width: auto !important;
+}
+
+#TuExChange-FooterPart > section > p {
+    color: #DDF0FA;
+    display: inline;
+    font-family: 'Source Sans Pro',sans-serif;
+    margin: 0 10px 0 0;
+    padding: 0;
+    text-shadow: 1px 1px 1px #10252F;
+}
+
+
+
+/* Parte Sup Info  */
+
+#TuExChange-SuperiorPart{
+	margin-top: 19px;
+	overflow: auto;
+}
+
+#TuExChange-SuperiorPart > nav {
+    background: url("images/TopAdive.png") repeat scroll 0 0 transparent !important;
+    border: 1px solid #292929;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 0 #7A7977 inset;
+    margin-left: 27px;
+    width: 952px;
+}
+
+
+#TuExChange-SuperiorPart > nav > li {
+    border-left: 1px solid #61605E;
+    border-right: 1px solid #212121;
+    float: left;
+    min-height: 50px;
+    list-style: none outside none;
+    padding: 0 14px !important;
+}
+
+#TuExChange-SuperiorPart > nav > li:first-child{
+	border-left: none;
+}
+
+#TuExChange-SuperiorPart > nav > li:last-child{
+	border-right: none;
+}
+
+#TuExChange-SuperiorPart > nav > li > div{
+	margin-top: 13px;
+}
+#TuExChange-SuperiorPart > nav > li > div > span {
+    color: #E2E2E2;
+    font-family: 'Source Sans Pro',sans-serif;
+	margin-right: 8px;
+	float: left;
+}
+
+
+#TuExChange-SuperiorPart > nav > li > div > span.blue{
+	color: #73A2BD;
+	margin-left: 3px;
+}
+
+
+#TuExChange-SuperiorPart > nav > li > div > marquee {
+    color: #73A2BD;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 15px;
+    margin-top: 2px;
+    width: 406px;
+}
+
+
+#TuExChange-SuperiorPart > nav > li > div > marquee > span {
+    color: #FFFFFF;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.TuExChange-SuperiorPartIcs {
+    background: url("images/topAdverts.png") repeat scroll 0 0 transparent;
+    float: left;
+    height: 16px;
+    margin-right: 7px;
+    margin-top: 3px;
+    width: 16px;
+}
+
+.TuExChange-SuperiorPartIcs.rate{
+	background-position: 0 -16px;
+}
+
+.TuExChange-SuperiorPartIcs.time{
+	background-position: 0 0;
+}
+
+
+
+
+
+
+/*********** Other Pages */
+
+
+#TuExChange-LeftCt {
+    float: left;
+    width: 68%;
+}
+
+#TuExChange-LeftCt > h1 {
+    color: #717171;
+    font-family: 'Source Sans Pro',sans-serif;
+}
+#TuExChange-LeftCt > p {
+    color: #9C9C9C;
+    font-family: 'Source Sans Pro',sans-serif;
+}
+#TuExChange-RightCt {
+    float: left;
+    margin-left: 29px;
+    width: 28%;
+}
+
+
+#TuExChange-InsideP {
+    margin-top: 0;
+    width: 100%;
+}
+
+
+#TuExChange-InsideP > section > p {
+    border-bottom: 1px dotted #DDDDDD;
+    padding-bottom: 12px;
+}
+
+#TuExChange-InsideP > section {
+    border-bottom: 1px solid #DDDDDD;
+    border-radius: 0 0 3px 3px;
+    font-size: 15px;
+    padding: 15px;
+    text-align: justify;
+}
+
+
+#TuExChange-InsideP > div {
+    padding-left: 17px;
+}
+
+
+.TuExChange-AboutUsR {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 1px #DDDDDD !important;
+    padding: 10px;
+}
+
+
+.TuExChange-AboutUsR > h1 {
+    border-bottom: 1px dotted #DDDDDD;
+    color: #6B889C;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 15px;
+    padding: 0 0 10px;
+	margin-top: 7px;
+}
+
+
+.TuExChange-AboutUsR > section > li {
+    border-bottom: 1px solid #E6E6E6;
+    color: #AAB9C3;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 13px;
+    list-style: none outside none;
+    padding-bottom: 9px;
+    padding-top: 9px;
+}
+
+.TuExChange-AboutUsR > section > li:hover{
+	color: #87A2B5;
+}
+
+.TuExChange-AboutUsR > section > li:last-child{
+	border-bottom: none;
+}
+
+/* Icon Fonts */
+@font-face {
+	font-family: 'TuExchangeWebF';
+	src:url('fonts/TuExchangeWebF.eot');
+	src:url('fonts/TuExchangeWebF.eot?#iefix') format('embedded-opentype'),
+		url('fonts/TuExchangeWebF.woff') format('woff'),
+		url('fonts/TuExchangeWebF.ttf') format('truetype'),
+		url('fonts/TuExchangeWebF.svg#TuExchangeWebF') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'TuExchangeWebF';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+.icon-user, .icon-key, .icon-uniF487, .icon-fastright, .icon-undo, .icon-asterisk, .icon-scaleup, .icon-user-2, .icon-bullhorn, .icon-calculator {
+	font-family: 'TuExchangeWebF';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-user:before {
+	content: "\e000";
+}
+.icon-key:before {
+	content: "\e001";
+}
+.icon-uniF487:before {
+	content: "\e003";
+}
+.icon-fastright:before {
+	content: "\f31b";
+}
+.icon-undo:before {
+	content: "\f32a";
+}
+.icon-asterisk:before {
+	content: "\2a";
+}
+.icon-scaleup:before {
+	content: "\f325";
+}
+.icon-user-2:before {
+	content: "\f133";
+}
+.icon-bullhorn:before {
+	content: "\e002";
+}
+.icon-calculator:before {
+	content: "\f258";
+}
+
+.calcIcon {
+    color: #FFFFFF;
+    display: inline-block;
+    float: right;
+    font-size: 13px;
+    margin-top: 1px;
+    text-shadow: 1px 1px 1px #387799;
+}
+
+
+/* Contacto Formulario */
+
+#TuExChange-InsideP > section > form {
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 10px;
+    padding-bottom: 14px;
+	overflow: auto;
+}
+#TuExChange-InsideP > section > form > section > div > p {
+    font-family: 'Source Sans Pro',sans-serif;
+    margin: 0 0 3px 1px;
+}
+
+
+#TuExChange-InsideP > section > form > section > div > span {
+    margin-right: 76px;
+}
+
+#TuExChange-InsideP > section > form > section {
+    display: block;
+    margin-bottom: 19px;
+}
+#TuExChange-InsideP > section > form > section > div {
+    display: inline-block;
+    margin-right: 9px;
+}
+
+
+#TuExChange-InsideP > section > form > section > div > input, #TuExChange-InsideP > section > form > section > div > select{
+    border: 1px solid #DDDDDD;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 2px #DDDDDD inset;
+    color: #8B8E8F;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 9px;
+    width: 291px;
+	transition: 1s all ease;
+}
+
+#TuExChange-InsideP > section > form > section > div > select{
+    width: 311px;
+}
+
+#TuExChange-InsideP > section > form > section > div > input[type='checkbox']{
+    width: 10px;
+}
+
+#TuExChange-InsideP > section > form > section > div > input.amount{
+    width: 60px;
+}
+
+#TuExChange-InsideP > section > form > section > div > input:hover, #TuExChange-InsideP > section > form > section > div > select:hover, .ContactTextarea:hover{
+	color:  #8AA0B2;
+}
+
+
+.ContactTextarea {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 2px #DDDDDD inset;
+    color: #8B8E8F;
+    font-family: 'Source Sans Pro',sans-serif;
+    padding: 9px;
+    width: 612px;
+	transition: 1s all ease
+}
+
+/* Botones Left */
+
+
+
+
+#LeftButtsCont {
+    left: 0;
+    margin-left: -53px;
+    margin-top: 66px;
+    position: fixed;
+}
+
+
+#LeftButtsRed, #LeftButtsBlue {
+    background: url("images/backred.png") repeat scroll 0 0 transparent;
+    border: 2px solid #EC757E;
+    border-radius: 0 0 5px 5px;
+    box-shadow: -1px -1px 1px #DA999B inset;
+    color: #FFFFFF;
+    font-family: 'Source Sans Pro',sans-serif;
+    font-size: 18px;
+    padding: 24px 10px 15px;
+    position: absolute;
+    text-shadow: 3px 2px 4px #EC757E;
+    text-transform: uppercase;
+    transition: all 0.8s ease;
+	border-left: none;
+	/* Safari */
+	-webkit-transform: rotate(270deg);
+
+	/* Firefox */
+	-moz-transform: rotate(270deg);
+
+	/* IE */
+	-ms-transform: rotate(270deg);
+
+	/* Opera */
+	-o-transform: rotate(270deg);
+
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=4);
+}
+
+
+#LeftButtsBlue {
+    background: url("images/backblue.png") repeat scroll 0 0 transparent !important;
+    border-color: #7599EB;
+    box-shadow: 1px 1px 1px #7599EB inset;
+    text-shadow: -1px -1px 2px #C9D3E8;
+}
+
+#LeftButtsBlue:hover, #LeftButtsRed:hover{
+	margin-left: 12px;
+}
+#LeftButtsRed {
+    margin-top: 166px;
+	padding-left: 28px;
+}
+
+#LeftButtsRed > span{
+	left: -9px;
+}
+
+#LeftButtsRed span, #LeftButtsBlue span {
+    padding: 0 7px;
+    position: relative;
+}
+
+
+/************************************************************************
+-) Slider: only the following lines are necceassary for slider styling,
+   rest of the css file styles the demo page
+*************************************************************************/
+
+
+.aviasliderCont {
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 10px #DDDDDD inset, 1px 1px 3px #D8D8D8;
+    height: 249px;
+    margin-left: 27px;
+    margin-top: 20px;
+    padding-top: 4px;
+    width: 952px;
+}
+
+.aviasliderContShadow {
+    background: url("images/shadowSlide.png") repeat scroll 0 0 transparent;
+    height: 30px;
+    margin-left: 28px;
+    margin-top: -1px;
+    width: 952px;
+}
+
+.aviaslider {
+    background: url("images/layout/preload.gif") no-repeat scroll center center #FFFFFF;
+    height: 245px;
+    overflow: hidden;
+    position: relative;
+    width: 944px;
+    padding: 0!important;
+    margin: 0 auto;
+}
+
+.aviaslider li, .aviaslider .featured{
+display: block;
+width:100%;
+height:100%;
+position: absolute;
+top:0;
+left:0;
+z-index: 1;
+}
+
+.js_active .aviaslider li, .js_active .aviaslider .featured{
+display:none;
+}
+
+.aviaslider img, .aviaslider a img, .aviaslider a{
+border:none;
+text-decoration: none;
+}
+
+.slidecontrolls{
+margin:20px auto 0 auto;
+position: relative;
+float:left;
+}
+
+.slidecontrolls a{
+height:20px;
+width:18px;
+display:block;
+cursor: pointer;
+background: transparent url(images/layout/controlls.gif) center bottom no-repeat;
+float:left;
+outline: none;
+}
+
+.slidecontrolls a:hover, .slidecontrolls .active_item{
+background: transparent url(images/layout/controlls.gif) center top no-repeat;
+}
+
+.feature_excerpt{
+width:610px;
+position: absolute;
+display: block;
+bottom: 0;
+left:0;
+z-index: 2;
+padding:14px 15px;
+font-size: 11.5px;
+line-height:1.5em;
+cursor: pointer;
+background: #000;
+color: #fff;
+display: none!important;
+}
+
+.feature_excerpt strong{
+display: block;
+font-size: 15px;
+padding-bottom: 3px;
+}
+
+
+
+/* Contact Spriute */
+
+.TuExChange-ContactSprit{
+	background: url(images/contactSprite.png);
+	display: inline-block;
+    height: 16px;
+    margin-right: 10px;
+    width: 16px;
+}
+
+.TuExChange-ContactSprit.Telf{
+	background-position: 0 0;
+}
+
+.TuExChange-ContactSprit.Mail{
+	background-position: 0 -16px;
+}
+
+.TuExChange-ContactSprit.Icq{
+	background-position: 0 -48px;
+}
+
+.TuExChange-ContactSprit.Skype{
+	background-position: 0 -32px;
+}
+
+.TuExChange-ContactSprit.BB{
+	background-position: 0 -64px;
+}
+
+
+.TuExChange-ContactSprit.Wts {
+    background-position: 0 -80px;
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#TuExChange-InsideP .left, .right{
+    display:inline-block;
+    width: 48%;
+}
+
+#TuExChange-InsideP .left{
+    padding-left: 40px;
+    width: 40%;
+}
