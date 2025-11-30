@@ -114,7 +114,7 @@ class Reportes extends CI_Controller
 					'tareas' => $this->tarea_modelo->getLista(1),
 				);	
 
-		$this->layout->view("reporte_general_xls", $data);
+		$this->layout->view("reporte_general_xlsx", $data);
 	}
 
 	public function test()
