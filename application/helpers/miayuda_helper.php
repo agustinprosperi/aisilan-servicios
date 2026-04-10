@@ -50,10 +50,12 @@ function uri_current($controller_current, $sw, $my_model, $method="index", $stat
             break;
     }
 
-    $text  = "<a href='".base_url() . "backend/$controller_current/$method/all/".$eve_tipo."/".$eve_id_padre."' class='$all all-items'>Todos(".count($my_model->getLista('all', $eve_tipo))."),</a>&nbsp;";
-    $text .= "<a href='".base_url() . "backend/$controller_current/$method/1/".$eve_tipo."/".$eve_id_padre."' class='$active active-items'>Activos(".count($my_model->getLista('1', $eve_tipo)).")</a>,&nbsp;";
-    $text .= "<a href='".base_url() . "backend/$controller_current/$method/0/".$eve_tipo."/".$eve_id_padre."' class='$inactive inactive-items'>Inactivos(".count($my_model->getLista('0', $eve_tipo)).")</a>";
-    if($state=='close') $text .= ",&nbsp;<a href='".base_url() . "backend/$controller_current/$method/2/".$eve_tipo."/".$eve_id_padre."' class='$close inactive-items ".(($usu_tipo_actual=="Coordinador")?"pointer-events-none":"")."'>Cerrados(".count($my_model->getLista('2', $eve_tipo)).")</a>";
+    $eve_id_padre_int = ($eve_id_padre !== '') ? intval($eve_id_padre) : (($eve_tipo === 'Simple') ? 0 : null);
+
+    $text  = "<a href='".base_url() . "backend/$controller_current/$method/all/".$eve_tipo."/".$eve_id_padre."' class='$all all-items'>Todos(".$my_model->getCount('all', $eve_tipo, $eve_id_padre_int)."),</a>&nbsp;";
+    $text .= "<a href='".base_url() . "backend/$controller_current/$method/1/".$eve_tipo."/".$eve_id_padre."' class='$active active-items'>Activos(".$my_model->getCount('1', $eve_tipo, $eve_id_padre_int).")</a>,&nbsp;";
+    $text .= "<a href='".base_url() . "backend/$controller_current/$method/0/".$eve_tipo."/".$eve_id_padre."' class='$inactive inactive-items'>Inactivos(".$my_model->getCount('0', $eve_tipo, $eve_id_padre_int).")</a>";
+    if($state=='close') $text .= ",&nbsp;<a href='".base_url() . "backend/$controller_current/$method/2/".$eve_tipo."/".$eve_id_padre."' class='$close inactive-items ".(($usu_tipo_actual=="Coordinador")?"pointer-events-none":"")."'>Cerrados(".$my_model->getCount('2', $eve_tipo, $eve_id_padre_int).")</a>";
 
     echo $text;
 }

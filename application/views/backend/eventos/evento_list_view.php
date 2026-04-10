@@ -18,10 +18,13 @@
 					<div class="col-md-12">
 						<?php echo $this->message->display(); ?>
 
-						<?php if($this->uri->segment(6) !== null): ?>
+						<?php if(!empty($eve_id_padre)): ?>
+						<?php $_evento_padre = $this->evento_modelo->getId($eve_id_padre); ?>
+						<?php if($_evento_padre): ?>
 						<div class="mb20 alert alert-info font-size-20">
-							<strong>Evento principal:</strong> <a class="color-white" href="<?php echo base_url(); ?>backend/eventos/editar/<?php echo $this->evento_modelo->getId($this->uri->segment(6))->eve_id ?>/0"><?php echo $this->evento_modelo->getId($this->uri->segment(6))->eve_name ?></a>
+							<strong>Evento principal:</strong> <a class="color-white" href="<?php echo base_url(); ?>backend/eventos/editar/<?php echo $_evento_padre->eve_id ?>/0"><?php echo $_evento_padre->eve_name ?></a>
 						</div>
+						<?php endif; ?>
 						<?php endif; ?>
 
 						<div class="widget box">
@@ -31,9 +34,20 @@
 									<?php echo uri_current("eventos", $this->uri->segment(4), $this->evento_modelo, 'index', 'close', $this->uri->segment(5, "Simple"), $this->uri->segment(6)!=null?$this->uri->segment(6):"", $this->session->userdata("usu_tipo_actual")); ?>
 								
 									<form class="filter-date ml20 d-flex mb0" method="post" action="<?php echo current_url(); ?>">
-										<input type="text" id="date_range_filter" name="date_range_filter" value="" class="form-control daterangefilter required">
+										<input type="text" id="date_range_filter" name="date_range_filter" value="<?php echo htmlspecialchars($date_filter_value ?? '', ENT_QUOTES); ?>" class="form-control daterangefilter">
 										<input type="submit" value="Filtrar" class="btn btn-primary btn-info ml10">
+										<?php if(!empty($date_filter_value)): ?>
+										<button type="submit" name="limpiar_filtro" value="1" class="btn btn-default ml5" title="Limpiar filtro">&times; Limpiar</button>
+										<?php endif; ?>
 									</form>
+
+									<!-- <form class="filter-search ml20 d-flex mb0" method="get" action="<?php echo current_url(); ?>">
+										<input type="text" name="search_text" value="<?php echo htmlspecialchars($search_text ?? '', ENT_QUOTES); ?>" class="form-control" placeholder="Buscar..." style="min-width:180px">
+										<button type="submit" class="btn btn-primary ml10"><i class="icon-search"></i> Buscar</button>
+										<?php if(!empty($search_text)): ?>
+										<a href="<?php echo current_url().'?sort='.(isset($sort)?$sort:'eve_date').'&dir='.(isset($sort_dir)?$sort_dir:'DESC'); ?>" class="btn btn-default ml5" title="Limpiar búsqueda">&times;</a>
+										<?php endif; ?>
+									</form> -->
 									
 								</div>
 								
@@ -63,22 +77,39 @@
 									method="post"
 								>
 
-									<table id="tabla_eventos" class="table table-striped table-bordered table-hover table-checkable datatable" data-display-length="25">
+									<table id="tabla_eventos" class="table table-striped table-bordered table-hover table-checkable">
 										<thead>
+											<?php
+											$_cs = isset($sort) ? $sort : 'eve_date';
+											$_cd = isset($sort_dir) ? $sort_dir : 'DESC';
+											$_search_qs = !empty($search_text) ? '&search_text='.urlencode($search_text) : '';
+											$_sort_base = current_url() . '?';
+											if(!function_exists('_sort_link')){
+												function _sort_link($label, $field, $current_sort, $current_dir, $base_url, $extra_qs = '') {
+													$is_active = ($current_sort === $field);
+													$next_dir  = ($is_active && $current_dir === 'ASC') ? 'DESC' : 'ASC';
+													$icon = '';
+													if($is_active) {
+														$icon = ($current_dir === 'ASC') ? ' <i class="icon-angle-up"></i>' : ' <i class="icon-angle-down"></i>';
+													}
+													return "<a href='{$base_url}sort={$field}&dir={$next_dir}{$extra_qs}' style='color:inherit;white-space:nowrap'>{$label}{$icon}</a>";
+												}
+											}
+											?>
 											<tr>
 												<?php if($this->session->userdata("usu_tipo_actual") != "Trabajador"): ?>
 												<th class="checkbox-column">
 													<input type="checkbox" class="uniform">
 												</th>
 												<?php endif; ?>
-												<th>ID</th>
-												<th width="25%">Evento / Fecha</th>
-												<th>Imputación</th>
-												<th>Proyecto</th>
+												<th><?php echo _sort_link('ID', 'eve_id', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
+												<th width="25%"><?php echo _sort_link('Evento', 'eve_name', $_cs, $_cd, $_sort_base, $_search_qs); ?> / <?php echo _sort_link('Fecha', 'eve_date', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
+												<th><?php echo _sort_link('Imputación', 'eve_imputacion', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
+												<th><?php echo _sort_link('Proyecto', 'pro_name', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
 												
-												<th>Coordinador</th>
+												<th><?php echo _sort_link('Coordinador', 'coordinador', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
 												<th>Validación<br>de Tareas</th>
-												<th class="align-center">Estado</th>
+												<th class="align-center"><?php echo _sort_link('Estado', 'eve_state', $_cs, $_cd, $_sort_base, $_search_qs); ?></th>
 												<th class="align-center">Acción</th>
 											</tr>
 										</thead>
@@ -110,8 +141,9 @@
 														<span class="label label-danger mb5 d-inline-block">El proyecto fue eliminado.</span>
 													<?php endif; ?>
 													<div>
-														<i><u>Cliente:</u> <?php echo $this->cliente_modelo->getId($valor->cli_id)->cli_name??""; ?></i>
-														<?php echo $this->cliente_modelo->getId($valor->cli_id)->cli_state==0?"<i class='fa fa-warning color-orange icon-parpadeo' title='Cliente inactivo'></i>":""; ?>
+														<?php $_cli_obj = $this->cliente_modelo->getId($valor->cli_id); ?>
+														<i><u>Cliente:</u> <?php echo $_cli_obj ? htmlspecialchars($_cli_obj->cli_name) : ""; ?></i>
+														<?php echo ($_cli_obj && $_cli_obj->cli_state==0) ? "<i class='fa fa-warning color-orange icon-parpadeo' title='Cliente inactivo'></i>" : ""; ?>
 													</div>
 												</td>
 												<td nowrap="nowrap">
@@ -126,7 +158,7 @@
 													}
 													?><i class='ml10 fa fa-external-link'></i>
 													</a>
-													<?php echo $this->usuario_modelo->getId($valor->coo_id)->usu_estado==0?"<i class='fa fa-warning color-orange icon-parpadeo' title='Coordinador inactivo'></i>":""; ?>
+													<?php $_coo_obj = $this->usuario_modelo->getId($valor->coo_id); echo ($_coo_obj && $_coo_obj->usu_estado==0) ? "<i class='fa fa-warning color-orange icon-parpadeo' title='Coordinador inactivo'></i>" : ""; ?>
 												</td>
 												<td nowrap="nowrap">
 													<?php if($valor->eve_tipo=="Simple"): ?>
@@ -214,9 +246,45 @@
 
 									<input type="hidden" name="eve_tipo" value="<?php echo $this->uri->segment(5, "Simple") ?>" />
 
-							
-									
 								</form>
+
+								<?php if($total_pages > 1): ?>
+								<nav class="mt15 nav-pagination">
+									<p class="text-muted">Mostrando <?php echo ($current_page - 1) * $per_page + 1; ?>-<?php echo min($current_page * $per_page, $total); ?> de <?php echo $total; ?> registros</p>
+									<ul class="pagination">
+										<?php
+										$sw_url    = $this->uri->segment(4);
+										$tipo_url  = $this->uri->segment(5, 'Simple');
+										$padre_url = !empty($eve_id_padre) ? $eve_id_padre : '0';
+										$_sort_qs  = '?sort='.urlencode($_cs).'&dir='.urlencode($_cd).(!empty($search_text) ? '&search_text='.urlencode($search_text) : '');
+										$base_page_url = base_url().'backend/eventos/index/'.$sw_url.'/'.$tipo_url.'/'.$padre_url.'/';
+										?>
+										<li class="<?php echo ($current_page <= 1) ? 'disabled' : ''; ?>">
+											<a href="<?php echo $base_page_url.($current_page - 1).$_sort_qs; ?>">← Ant</a>
+										</li>
+										<?php
+										$window = 2;
+										$p_start = max(1, $current_page - $window);
+										$p_end   = min($total_pages, $current_page + $window);
+										if($p_start > 1): ?>
+											<li><a href="<?php echo $base_page_url.'1'.$_sort_qs; ?>">1</a></li>
+											<?php if($p_start > 2): ?><li class="disabled"><a>...</a></li><?php endif; ?>
+										<?php endif; ?>
+										<?php for($p = $p_start; $p <= $p_end; $p++): ?>
+											<li class="<?php echo ($p == $current_page) ? 'active' : ''; ?>">
+												<a href="<?php echo $base_page_url.$p.$_sort_qs; ?>"><?php echo $p; ?></a>
+											</li>
+										<?php endfor; ?>
+										<?php if($p_end < $total_pages): ?>
+											<?php if($p_end < $total_pages - 1): ?><li class="disabled"><a>...</a></li><?php endif; ?>
+											<li><a href="<?php echo $base_page_url.$total_pages.$_sort_qs; ?>"><?php echo $total_pages; ?></a></li>
+										<?php endif; ?>
+										<li class="<?php echo ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
+											<a href="<?php echo $base_page_url.($current_page + 1).$_sort_qs; ?>">Próx →</a>
+										</li>
+									</ul>
+								</nav>
+								<?php endif; ?>
 
 							</div>
 						</div>

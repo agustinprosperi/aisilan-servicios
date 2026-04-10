@@ -58,6 +58,134 @@ class Evento_modelo extends CI_Model
 		return $query->result();
 	}
 
+	private function _getWhereConditions($sw, $eve_tipo, $eve_id_padre_param = null, $where_date_range_param = null, $search = '')
+	{
+		if($eve_tipo == 'Simple'){
+			$eve_tipo_where = "eve_tipo='Simple'";
+		}else{
+			$eve_tipo_where = "eve_tipo='Multiple'";
+		}
+
+		if($sw == "all")
+			$sw_where = "1";
+		else
+			$sw_where = "eve.eve_state = '".intval($sw)."'";
+
+		if($this->session->userdata("usu_tipo_actual") == "Coordinador"){
+			$coo_id = intval($this->session->userdata("usu_id_actual"));
+			$coo_id_where = "eve.coo_id = '$coo_id'";
+		}else
+			$coo_id_where = "1";
+
+		if($eve_id_padre_param !== null){
+			if($eve_id_padre_param > 0){
+				// Sub-eventos de un evento Multiple concreto
+				$eve_id_padre_where = "eve.eve_id_padre = ".intval($eve_id_padre_param);
+				$eve_tipo_where = "eve_tipo='Simple'";
+			}elseif($eve_tipo === 'Simple'){
+				// Eventos Simple de primer nivel (sin padre)
+				$eve_tipo_where = "eve_tipo='Simple'";
+				$eve_id_padre_where = "eve.eve_id_padre = 0";
+			}else{
+				// Listado de Múltiples: no filtrar por eve_id_padre
+				$eve_id_padre_where = "1";
+			}
+		}else{
+			$eve_id_padre_where = "1";
+		}
+
+		$where_date_range = ($where_date_range_param !== null) ? $where_date_range_param : "1";
+
+		if($search !== ''){
+			$s = $this->db->escape_like_str($search);
+			$search_where = "(eve.eve_id LIKE '%{$s}%'
+						OR eve.eve_name LIKE '%{$s}%'
+						OR eve.eve_imputacion LIKE '%{$s}%'
+						OR pro_s.pro_name LIKE '%{$s}%'
+						OR cli_s.cli_name LIKE '%{$s}%'
+						OR CONCAT(usu_s.usu_ap, ' ', usu_s.usu_am, ' ', usu_s.usu_nombre) LIKE '%{$s}%')";
+			$search_needs_joins = true;
+		}else{
+			$search_where = '1';
+			$search_needs_joins = false;
+		}
+
+		return array($sw_where, $coo_id_where, $eve_tipo_where, $eve_id_padre_where, $where_date_range, $search_where, $search_needs_joins);
+	}
+
+	public function getCount($sw = '', $eve_tipo = 'Simple', $eve_id_padre_param = null, $where_date_range_param = null, $search = '')
+	{
+		list($sw_where, $coo_id_where, $eve_tipo_where, $eve_id_padre_where, $where_date_range, $search_where, $search_needs_joins) =
+			$this->_getWhereConditions($sw, $eve_tipo, $eve_id_padre_param, $where_date_range_param, $search);
+
+		$join_pro_s = $search_needs_joins ? "LEFT JOIN wfc_projects pro_s ON eve.pro_id = pro_s.pro_id" : "";
+		$join_cli_s = $search_needs_joins ? "LEFT JOIN wfc_client cli_s ON eve.cli_id = cli_s.cli_id" : "";
+		$join_usu_s = $search_needs_joins ? "LEFT JOIN usuario usu_s ON eve.coo_id = usu_s.usu_id" : "";
+
+		$query = $this->db->query("SELECT COUNT(*) as total FROM wfc_events eve
+								   $join_pro_s
+								   $join_cli_s
+								   $join_usu_s
+								   WHERE $sw_where
+								     AND $coo_id_where
+								     AND $eve_tipo_where
+								     AND $eve_id_padre_where
+								     AND $where_date_range
+								     AND $search_where");
+		$row = $query->row();
+		return (int)$row->total;
+	}
+
+	public function getListaPaginada($sw = '', $eve_tipo = 'Simple', $offset = 0, $limit = 25, $eve_id_padre_param = null, $where_date_range_param = null, $sort = 'eve_date', $dir = 'DESC', $search = '')
+	{
+		list($sw_where, $coo_id_where, $eve_tipo_where, $eve_id_padre_where, $where_date_range, $search_where, $search_needs_joins) =
+			$this->_getWhereConditions($sw, $eve_tipo, $eve_id_padre_param, $where_date_range_param, $search);
+
+		$offset = intval($offset);
+		$limit  = intval($limit);
+		$dir    = (strtoupper($dir) === 'ASC') ? 'ASC' : 'DESC';
+
+		// Alias de sort usan alias _s para no colisionar con los joins de búsqueda
+		$needs_pro_sort = ($sort === 'pro_name');
+		$needs_usu_sort = ($sort === 'coordinador');
+
+		$sort_map = array(
+			'eve_id'         => 'eve.eve_id',
+			'eve_name'       => 'eve.eve_name',
+			'eve_date'       => 'eve.eve_date',
+			'eve_imputacion' => 'eve.eve_imputacion',
+			'eve_state'      => 'eve.eve_state',
+			'pro_name'       => $search_needs_joins ? 'pro_s.pro_name'  : 'pro_sort.pro_name',
+			'coordinador'    => $search_needs_joins ? 'CONCAT(usu_s.usu_ap, usu_s.usu_am, usu_s.usu_nombre)' : 'CONCAT(usu_sort.usu_ap, usu_sort.usu_am, usu_sort.usu_nombre)',
+		);
+		$order_by = isset($sort_map[$sort]) ? $sort_map[$sort] : 'eve.eve_date';
+
+		// JOINs de búsqueda (alias _s)
+		$join_pro_s = $search_needs_joins ? "LEFT JOIN wfc_projects pro_s ON eve.pro_id = pro_s.pro_id" : "";
+		$join_cli_s = $search_needs_joins ? "LEFT JOIN wfc_client cli_s ON eve.cli_id = cli_s.cli_id" : "";
+		$join_usu_s = $search_needs_joins ? "LEFT JOIN usuario usu_s ON eve.coo_id = usu_s.usu_id" : "";
+
+		// JOINs de sort adicionales (solo cuando no hay búsqueda, para evitar duplicados)
+		$join_pro_sort = (!$search_needs_joins && $needs_pro_sort) ? "LEFT JOIN wfc_projects pro_sort ON eve.pro_id = pro_sort.pro_id" : "";
+		$join_usu_sort = (!$search_needs_joins && $needs_usu_sort) ? "LEFT JOIN usuario usu_sort ON eve.coo_id = usu_sort.usu_id" : "";
+
+		$query = $this->db->query("SELECT eve.* FROM wfc_events eve
+								   $join_pro_s
+								   $join_cli_s
+								   $join_usu_s
+								   $join_pro_sort
+								   $join_usu_sort
+								   WHERE $sw_where
+								     AND $coo_id_where
+								     AND $eve_tipo_where
+								     AND $eve_id_padre_where
+								     AND $where_date_range
+								     AND $search_where
+								   ORDER BY $order_by $dir
+								   LIMIT $limit OFFSET $offset");
+		return $query->result();
+	}
+
 	/**
 	 * insertar un registro en la tabla materia
 	 */

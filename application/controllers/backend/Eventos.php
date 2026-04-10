@@ -38,7 +38,7 @@ class Eventos extends CI_Controller
         $this->layout->setTitle($this->page_title);
 	}
 
-	public function index($sw='', $eve_tipo='Simple')
+	public function index($sw='', $eve_tipo='Simple', $eve_id_padre='', $page=1)
 	{
 		//si no tiene permisos es redirigido al escritorio
 		if(!verificarPermiso("eve_lista")) redirect (base_url().'backend/');
@@ -47,10 +47,65 @@ class Eventos extends CI_Controller
 		if($eve_tipo == "Simple") $this->current_evento_lista_simple = "class='current'";
 		if($eve_tipo == "Multiple") $this->current_evento_lista_multiple = "class='current'";
 
+		// Gestión del filtro de fechas en sesión
+		if($this->input->post('date_range_filter') !== null && $this->input->post('date_range_filter') !== ''){
+			$this->session->set_userdata('eve_date_filter', $this->input->post('date_range_filter'));
+			// Al filtrar, volvemos a página 1
+			$page = 1;
+		}
+		if($this->input->post('limpiar_filtro') !== null){
+			$this->session->unset_userdata('eve_date_filter');
+			$page = 1;
+		}
+
+		// Búsqueda de texto por GET
+		$search_text = trim($this->input->get('search_text') ?? '');
+
+		// Construir condición de fechas desde sesión
+		$where_date_range = null;
+		$date_filter_value = $this->session->userdata('eve_date_filter');
+		if($date_filter_value){
+			$eve_date_filter = explode(" - ", $date_filter_value);
+			$eve_fecha_init = trim(isset($eve_date_filter[0]) ? $eve_date_filter[0] : '');
+			$eve_fecha_fin  = trim(isset($eve_date_filter[1]) ? $eve_date_filter[1] : '');
+			if($eve_fecha_init && $eve_fecha_fin){
+				$where_date_range = "eve.eve_date BETWEEN '".$this->db->escape_str($eve_fecha_init)."' AND '".$this->db->escape_str($eve_fecha_fin)."'";
+			}
+		}
+
+		// Inferir eve_id_padre del segmento de URL si no viene como parámetro
+		$eve_id_padre_param = ($eve_id_padre !== '') ? $eve_id_padre : $this->uri->segment(6);
+		if($eve_id_padre_param === null || $eve_id_padre_param === ''){
+			$eve_id_padre_param_int = ($eve_tipo === 'Simple') ? 0 : null;
+		}else{
+			$eve_id_padre_param_int = intval($eve_id_padre_param);
+		}
+
+		$per_page    = 25;
+		$page        = max(1, intval($page));
+		$offset      = ($page - 1) * $per_page;
+
+		$total       = $this->evento_modelo->getCount($sw, $eve_tipo, $eve_id_padre_param_int, $where_date_range, $search_text);
+		$total_pages = max(1, ceil($total / $per_page));
+
+		$valid_sorts = array('eve_id', 'eve_name', 'eve_date', 'eve_imputacion', 'eve_state', 'pro_name', 'coordinador');
+		$sort = $this->input->get('sort') ?? 'eve_date';
+		$dir  = $this->input->get('dir') ?? 'DESC';
+		if(!in_array($sort, $valid_sorts)) $sort = 'eve_date';
+		if(!in_array(strtoupper($dir), array('ASC', 'DESC'))) $dir = 'DESC';
+
 		$data = array(
-					"lista"  	=> $this->evento_modelo->getLista($sw, $eve_tipo),
-					"eve_tipo" 	=> $eve_tipo,
-					
+					"lista"             => $this->evento_modelo->getListaPaginada($sw, $eve_tipo, $offset, $per_page, $eve_id_padre_param_int, $where_date_range, $sort, $dir, $search_text),
+					"eve_tipo"          => $eve_tipo,
+					"current_page"      => $page,
+					"total_pages"       => $total_pages,
+					"total"             => $total,
+					"per_page"          => $per_page,
+					"date_filter_value" => $date_filter_value,
+					"eve_id_padre"      => ($eve_id_padre_param_int > 0) ? $eve_id_padre_param_int : null,
+					"sort"              => $sort,
+					"sort_dir"          => $dir,
+					"search_text"       => $search_text,
 				);
 
 		$this->layout->view("evento_list_view", $data);

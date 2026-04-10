@@ -3499,3 +3499,15 @@ span.text-normal{
 .color-white{color:white!important}
 .color-orange{color:orange!important}
 .color-grey{color:grey!important}
+
+.nav-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.nav-pagination p {
+  margin: 0;
+}
