@@ -1130,12 +1130,15 @@ function calculoX($start, $end, $horquilla, $holidays = []) {
     }
 
     return [
-        'hora_dia' => $dayHours > 0 ? $dayHours : null,
-        'tipo_hora_dia' => $dayHours > 0 ? $typeDay : null,
-        'hora_noche' => $nightHours > 0 ? $nightHours : null,
-        'tipo_hora_noche' => $nightHours > 0 ? $typeNight : null,
-        'horquilla_dia'     => $horquilla_dia,
-        'horquilla_noche'   => $horquilla_noche,
+        'hora_dia'            => $dayHours > 0 ? $dayHours : null,
+        'tipo_hora_dia'       => $dayHours > 0 ? $typeDay : null,
+        'hora_noche'          => $nightHours > 0 ? $nightHours : null,
+        'tipo_hora_noche'     => $nightHours > 0 ? $typeNight : null,
+        'horquilla_dia'       => $horquilla_dia,
+        'horquilla_noche'     => $horquilla_noche,
+        'hora_madrugada'      => null,
+        'tipo_hora_madrugada' => null,
+        'horquilla_madrugada' => null,
     ];
 }
 

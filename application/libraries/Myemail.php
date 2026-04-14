@@ -47,7 +47,7 @@ class Myemail
 		$usuario = $this->CI->usuario_modelo->getId($usu_id);
 		//enviar email
         $from_email = "ebim@gmail";
-        $to_email = $usuario['usu_email'];
+        $to_email = $usuario->usu_email;
         //Load email library
 
         $this->CI->email->from($from_email, 'E.B.I.M.');

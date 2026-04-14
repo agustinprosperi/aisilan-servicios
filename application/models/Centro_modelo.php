@@ -22,6 +22,18 @@ class Centro_modelo extends CI_Model
 		return $query->result();
 	}
 
+	public function getCount($sw = '')
+	{
+		if($sw == '' || $sw == 'all')
+			$sw_where = "1";
+		else
+			$sw_where = "c.cen_state = '" . $this->db->escape_str($sw) . "'";
+
+		$query = $this->db->query("SELECT COUNT(*) as total FROM wfc_centers c WHERE $sw_where");
+		$row = $query->row();
+		return (int)$row->total;
+	}
+
 	/**
 	 * insertar un registro en la tabla materia
 	 */

@@ -77,7 +77,10 @@ class Centros extends CI_Controller
 					"cen_id"	=> "",
 					"cen_name"	=> '',
 					"cen_state"	=> '1',
-
+					"prov_id"	=> 0,
+					"loc_id"	=> 0,
+					"hor_id"	=> 0,
+					"localidades"   => array(),
 					"centros" => $this->centro_modelo->getLista(1),
 					"provincias" => $this->provincia_modelo->getLista(),
 					"horquillas"    => $this->horquillahoraria_modelo->getLista(1),

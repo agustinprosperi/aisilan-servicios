@@ -28,6 +28,24 @@ class Proyecto_modelo extends CI_Model
 		return $query->result();
 	}
 
+	public function getCount($sw = '')
+	{
+		if($sw == '' || $sw == 'all')
+			$sw_where = "1";
+		else
+			$sw_where = "pro.pro_state = '" . $this->db->escape_str($sw) . "'";
+
+		if($this->session->userdata("usu_tipo_actual") == "Coordinador"){
+			$coo_id = $this->session->userdata("usu_id_actual");
+			$coo_id_where = "pro.coo_id = '" . $this->db->escape_str($coo_id) . "'";
+		}else
+			$coo_id_where = "1";
+
+		$query = $this->db->query("SELECT COUNT(*) as total FROM wfc_projects pro WHERE $sw_where AND $coo_id_where");
+		$row = $query->row();
+		return (int)$row->total;
+	}
+
 	/**
 	 * insertar un registro en la tabla materia
 	 */
