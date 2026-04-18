@@ -266,7 +266,9 @@ class Evento_modelo extends CI_Model
 	public function delete($id)
 	{
 		if(empty($id)){
-			$lista = implode(',',$this->input->post("seleccion"));
+			$seleccion = $this->input->post("seleccion");
+			if(empty($seleccion)) return false;
+			$lista = implode(',', (array)$seleccion);
 			return $this->db->query("UPDATE wfc_events SET eve_state='0' WHERE eve_id IN(".$lista.")");
 		}else
 			return $this->db->query("UPDATE wfc_events SET eve_state='0' WHERE eve_id='$id'");
@@ -275,11 +277,14 @@ class Evento_modelo extends CI_Model
 	public function delete_fisica($id)
 	{
 		if(empty($id)){
-			foreach($this->input->post("seleccion") as $eve_id){
+			$seleccion = $this->input->post("seleccion");
+			if(empty($seleccion)) return false;
+			$seleccion = (array)$seleccion;
+			foreach($seleccion as $eve_id){
 				$this->db->query("DELETE FROM wfc_event_task WHERE eve_id='$eve_id'");
 				$this->db->query("DELETE FROM wfc_event_task_worker WHERE eve_id='$eve_id'");
 			}
-			$lista = implode(',',$this->input->post("seleccion"));
+			$lista = implode(',', $seleccion);
 			return $this->db->query("DELETE FROM wfc_events WHERE eve_id IN(".$lista.")");
 		}else{
 			$this->db->query("DELETE FROM wfc_event_task WHERE eve_id='$id'");
@@ -349,7 +354,9 @@ class Evento_modelo extends CI_Model
 	}
 	public function cerrar()
 	{
-		$lista = implode(',',$this->input->post("seleccion"));
+		$seleccion = $this->input->post("seleccion");
+		if(empty($seleccion)) return false;
+		$lista = implode(',', (array)$seleccion);
 		return $this->db->query("UPDATE wfc_events SET eve_state='2' WHERE eve_id IN(".$lista.")");
 	}
 

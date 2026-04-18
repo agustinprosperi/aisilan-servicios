@@ -37,32 +37,27 @@
 										<input type="text" id="date_range_filter" name="date_range_filter" value="<?php echo htmlspecialchars($date_filter_value ?? '', ENT_QUOTES); ?>" class="form-control daterangefilter">
 										<input type="submit" value="Filtrar" class="btn btn-primary btn-info ml10">
 										<?php if(!empty($date_filter_value)): ?>
-										<button type="submit" name="limpiar_filtro" value="1" class="btn btn-default ml5" title="Limpiar filtro">&times; Limpiar</button>
+											<button type="submit" name="limpiar_filtro" value="1" class="btn btn-default ml5" title="Limpiar filtro">&times; Limpiar</button>
 										<?php endif; ?>
 									</form>
 
-									<!-- <form class="filter-search ml20 d-flex mb0" method="get" action="<?php echo current_url(); ?>">
+									<?php $_search_base = base_url().'backend/eventos/index/'.($sw??'').'/'.($eve_tipo??'Simple').'/'.($eve_id_padre??0).'/1'; ?>
+									<form class="filter-search ml20 d-flex mb0" method="get" action="<?php echo $_search_base; ?>">
 										<input type="text" name="search_text" value="<?php echo htmlspecialchars($search_text ?? '', ENT_QUOTES); ?>" class="form-control" placeholder="Buscar..." style="min-width:180px">
-										<button type="submit" class="btn btn-primary ml10"><i class="icon-search"></i> Buscar</button>
+										<button type="submit" class="btn btn-primary ml10"><i class="icon-search"></i></button>
 										<?php if(!empty($search_text)): ?>
-										<a href="<?php echo current_url().'?sort='.(isset($sort)?$sort:'eve_date').'&dir='.(isset($sort_dir)?$sort_dir:'DESC'); ?>" class="btn btn-default ml5" title="Limpiar búsqueda">&times;</a>
+											<a href="<?php echo $_search_base?>" class="btn btn-default ml5" title="Limpiar búsqueda">&times;</a>
 										<?php endif; ?>
-									</form> -->
+									</form>
 									
-								</div>
-								
-								<div class="toolbar no-padding">
-									<div class="btn-group">
-										<span class="btn btn-xs widget-collapse"><i class="icon-angle-down"></i></span>
-									</div>
 								</div>
 
 								<?php if(verificarPermiso("eve_nuevo")): ?>
-								<div class="toolbar" style="margin-right: 25px; ">
-									<!--<a href="<?php echo base_url()."backend/eventos/insertar_tarea/"; ?>" class="btn btn-primary btn-info mb-2" data-toggle="modal" 
-																data-target="#crearEventoModal" >Crear Evento</a>-->
-									<a href="<?php echo base_url()."backend/eventos/insertar_tarea/0/".$this->uri->segment(6); ?>" class="btn btn-primary btn-info mb-2">Nuevo Evento</a>
-								</div>
+									<div class="toolbar">
+										<!--<a href="<?php echo base_url()."backend/eventos/insertar_tarea/"; ?>" class="btn btn-primary btn-info mb-2" data-toggle="modal" 
+																	data-target="#crearEventoModal" >Crear Evento</a>-->
+										<a href="<?php echo base_url()."backend/eventos/insertar_tarea/0/".$this->uri->segment(6); ?>" class="btn btn-primary btn-info mb-2">Nuevo Evento</a>
+									</div>
 								<?php endif; ?>
 							</div>
 							<div class="widget-content">
@@ -233,13 +228,51 @@
 											<?php endforeach; ?>
 										</tbody>
 									</table>
+
+									<?php if($total_pages > 1): ?>
+										<nav class="nav-pagination">
+											<p class="text-muted">Mostrando <?php echo ($current_page - 1) * $per_page + 1; ?>-<?php echo min($current_page * $per_page, $total); ?> de <?php echo $total; ?> registros</p>
+											<ul class="pagination">
+												<?php
+												$sw_url    = $this->uri->segment(4);
+												$tipo_url  = $this->uri->segment(5, 'Simple');
+												$padre_url = !empty($eve_id_padre) ? $eve_id_padre : '0';
+												$_sort_qs  = '?sort='.urlencode($_cs).'&dir='.urlencode($_cd).(!empty($search_text) ? '&search_text='.urlencode($search_text) : '');
+												$base_page_url = base_url().'backend/eventos/index/'.$sw_url.'/'.$tipo_url.'/'.$padre_url.'/';
+												?>
+												<li class="<?php echo ($current_page <= 1) ? 'disabled' : ''; ?>">
+													<a href="<?php echo $base_page_url.($current_page - 1).$_sort_qs; ?>">← Ant</a>
+												</li>
+												<?php
+												$window = 2;
+												$p_start = max(1, $current_page - $window);
+												$p_end   = min($total_pages, $current_page + $window);
+												if($p_start > 1): ?>
+													<li><a href="<?php echo $base_page_url.'1'.$_sort_qs; ?>">1</a></li>
+													<?php if($p_start > 2): ?><li class="disabled"><a>...</a></li><?php endif; ?>
+												<?php endif; ?>
+												<?php for($p = $p_start; $p <= $p_end; $p++): ?>
+													<li class="<?php echo ($p == $current_page) ? 'active' : ''; ?>">
+														<a href="<?php echo $base_page_url.$p.$_sort_qs; ?>"><?php echo $p; ?></a>
+													</li>
+												<?php endfor; ?>
+												<?php if($p_end < $total_pages): ?>
+													<?php if($p_end < $total_pages - 1): ?><li class="disabled"><a>...</a></li><?php endif; ?>
+													<li><a href="<?php echo $base_page_url.$total_pages.$_sort_qs; ?>"><?php echo $total_pages; ?></a></li>
+												<?php endif; ?>
+												<li class="<?php echo ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
+													<a href="<?php echo $base_page_url.($current_page + 1).$_sort_qs; ?>">Próx →</a>
+												</li>
+											</ul>
+										</nav>
+									<?php endif; ?>
+
 									<?php if(verificarPermiso("eve_eliminar")): ?>
 										<?php if($this->uri->segment(4) !== '0'): ?>
-										<button name="btn_eliminar" class="confirm-dialog-inactive-various btn btn-info" data-modal="true" data-text="" data-layout="top" title="Desactivar eventos seleccionados"><i class="icon-remove"></i> Desactivar</button>
+											<button name="btn_eliminar" class="confirm-dialog-inactive-various btn btn-info" data-modal="true" data-text="" data-layout="top" title="Desactivar eventos seleccionados"><i class="icon-remove"></i> Desactivar</button>
 										<?php else: ?>
-										<button name="btn_eliminar" class="confirm-dialog-delete-various btn btn-danger" data-modal="true" data-text="" data-layout="top" title="Elimianar eventos seleccionados"><i class="icon-remove"></i> Eliminar definitivamente</button>
-										<button name="" class="confirm-dialog-activar-various btn btn-default" data-modal="true" data-text="" data-layout="top" title="Activar eventos seleccionados"><span class="icon-check" title="Activo"></span> Activar</button>
-										
+											<button name="btn_eliminar" class="confirm-dialog-delete-various btn btn-danger" data-modal="true" data-text="" data-layout="top" title="Elimianar eventos seleccionados"><i class="icon-remove"></i> Eliminar definitivamente</button>
+											<button name="" class="confirm-dialog-activar-various btn btn-default" data-modal="true" data-text="" data-layout="top" title="Activar eventos seleccionados"><span class="icon-check" title="Activo"></span> Activar</button>
 										<?php endif; ?>
 										<button name="" class="confirm-dialog-cerrar-various btn btn-default" data-modal="true" data-text="" data-layout="top" title="Cerrar eventos seleccionados"><span class="icon-lock" title="Cerrado"></span> Cerrar</button>
 									<?php endif; ?>
@@ -247,44 +280,6 @@
 									<input type="hidden" name="eve_tipo" value="<?php echo $this->uri->segment(5, "Simple") ?>" />
 
 								</form>
-
-								<?php if($total_pages > 1): ?>
-								<nav class="mt15 nav-pagination">
-									<p class="text-muted">Mostrando <?php echo ($current_page - 1) * $per_page + 1; ?>-<?php echo min($current_page * $per_page, $total); ?> de <?php echo $total; ?> registros</p>
-									<ul class="pagination">
-										<?php
-										$sw_url    = $this->uri->segment(4);
-										$tipo_url  = $this->uri->segment(5, 'Simple');
-										$padre_url = !empty($eve_id_padre) ? $eve_id_padre : '0';
-										$_sort_qs  = '?sort='.urlencode($_cs).'&dir='.urlencode($_cd).(!empty($search_text) ? '&search_text='.urlencode($search_text) : '');
-										$base_page_url = base_url().'backend/eventos/index/'.$sw_url.'/'.$tipo_url.'/'.$padre_url.'/';
-										?>
-										<li class="<?php echo ($current_page <= 1) ? 'disabled' : ''; ?>">
-											<a href="<?php echo $base_page_url.($current_page - 1).$_sort_qs; ?>">← Ant</a>
-										</li>
-										<?php
-										$window = 2;
-										$p_start = max(1, $current_page - $window);
-										$p_end   = min($total_pages, $current_page + $window);
-										if($p_start > 1): ?>
-											<li><a href="<?php echo $base_page_url.'1'.$_sort_qs; ?>">1</a></li>
-											<?php if($p_start > 2): ?><li class="disabled"><a>...</a></li><?php endif; ?>
-										<?php endif; ?>
-										<?php for($p = $p_start; $p <= $p_end; $p++): ?>
-											<li class="<?php echo ($p == $current_page) ? 'active' : ''; ?>">
-												<a href="<?php echo $base_page_url.$p.$_sort_qs; ?>"><?php echo $p; ?></a>
-											</li>
-										<?php endfor; ?>
-										<?php if($p_end < $total_pages): ?>
-											<?php if($p_end < $total_pages - 1): ?><li class="disabled"><a>...</a></li><?php endif; ?>
-											<li><a href="<?php echo $base_page_url.$total_pages.$_sort_qs; ?>"><?php echo $total_pages; ?></a></li>
-										<?php endif; ?>
-										<li class="<?php echo ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
-											<a href="<?php echo $base_page_url.($current_page + 1).$_sort_qs; ?>">Próx →</a>
-										</li>
-									</ul>
-								</nav>
-								<?php endif; ?>
 
 							</div>
 						</div>

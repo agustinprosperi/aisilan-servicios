@@ -1,4 +1,13 @@
 <?php
+/**
+ * @property Evento_modelo $evento_modelo
+ * @property Proyecto_modelo $proyecto_modelo
+ * @property Cliente_modelo $cliente_modelo
+ * @property Usuario_modelo $usuario_modelo
+ * @property Categoria_modelo $categoria_modelo
+ * @property Tarea_modelo $tarea_modelo
+ * @property Notificacion_modelo $notificacion_modelo
+ */
 class Eventos extends CI_Controller
 {
 	//public $username;
@@ -96,6 +105,7 @@ class Eventos extends CI_Controller
 
 		$data = array(
 					"lista"             => $this->evento_modelo->getListaPaginada($sw, $eve_tipo, $offset, $per_page, $eve_id_padre_param_int, $where_date_range, $sort, $dir, $search_text),
+					"sw"                => $sw,
 					"eve_tipo"          => $eve_tipo,
 					"current_page"      => $page,
 					"total_pages"       => $total_pages,
@@ -159,6 +169,8 @@ class Eventos extends CI_Controller
 			'tareas_night'	=> $this->evento_modelo->getListaTareasByEveIdTraId($eve_id, $tra_id, 'night'),
 
 			'tareas_continue'=> $this->evento_modelo->getListaTareasByEveIdTraId($eve_id, $tra_id, 'Continuo'),
+
+			'tareas'		=> $this->tarea_modelo->getLista(1),
 
 			'_evento' 		=> $evento,
 			'_proyecto' 	=> $proyecto,
@@ -376,14 +388,15 @@ class Eventos extends CI_Controller
 			$eve_tipo = $this->evento_modelo->getId($id)->eve_tipo;
 
 		if($w == 'DEL' && $eve_tipo == "Simple")
-			$this->evento_modelo->delete_fisica($id);
+			$resultado = $this->evento_modelo->delete_fisica($id);
 		elseif($w == 'DEL' && $eve_tipo == "Multiple")
-			$this->evento_modelo->delete_fisica_multiple($id);
+			$resultado = $this->evento_modelo->delete_fisica_multiple($id);
 		else
-			$this->evento_modelo->delete($id);
+			$resultado = $this->evento_modelo->delete($id);
 
-		$this->message->set("info","<strong>Registro removido!</strong> El registro fue eliminado satisfactoriamente.", true);
-		$resultado = redirect(base_url()."backend/eventos/index/1/".$eve_tipo);
+		if($resultado !== false)
+			$this->message->set("info","<strong>Registro removido!</strong> El registro fue eliminado satisfactoriamente.", true);
+		redirect(base_url()."backend/eventos/index/1/".$eve_tipo);
 	}
 	// activar eventos
 	public function activar()
@@ -402,10 +415,11 @@ class Eventos extends CI_Controller
 		//si no tiene permisos es redirigido al escritorio
 		if(!verificarPermiso("eve_eliminar")) redirect (base_url().'backend/');
 
-		$this->evento_modelo->cerrar();
+		$resultado = $this->evento_modelo->cerrar();
 
-		$this->message->set("info","<strong>Eventos cerrados!</strong> Los eventos fueron cerrados satisfactoriamente.", true);
-		$resultado = redirect(base_url()."backend/eventos/index/1/".$this->input->post('eve_tipo'));
+		if($resultado !== false)
+			$this->message->set("info","<strong>Eventos cerrados!</strong> Los eventos fueron cerrados satisfactoriamente.", true);
+		redirect(base_url()."backend/eventos/index/1/".$this->input->post('eve_tipo'));
 	}
 	/*
 	public function aniadir_trabajador(){

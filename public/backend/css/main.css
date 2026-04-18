@@ -3511,3 +3511,6 @@ span.text-normal{
 .nav-pagination p {
   margin: 0;
 }
+.nav-pagination .pagination {
+  margin: 10px 0;
+}
